@@ -15,6 +15,7 @@
     <link rel="icon" href="/static/img/core-img/favicon.ico">
 
     <!-- Stylesheet -->
+
     <link rel="stylesheet" href="/static/style.css">
 
 </head>
@@ -57,15 +58,24 @@
 
                             <!-- Nav Start -->
                             <div class="classynav">
+                                {% if user.is_authenticated %}
                                  <ul>
-                                    <li><a href="/category">Category</a></li>
+                                    <li><a href="{% url 'home' %}" class="active">Home</a></li>
                                 </ul>
+                                     <ul>
+                                    <li><a href="/personal">Personalized</a></li>
+                                </ul>
+                                    <ul>
+                                    <li><a href="/logout">Logout</a></li>
+                                </ul>
+                                {% else %}
                                 <ul>
                                     <li><a href="/login">Login</a></li>
                                 </ul>
                                   <ul>
                                     <li><a href="/register">Register</a></li>
                                 </ul>
+                                {% endif %}
 
 
                                 <!-- Header Add Area -->
@@ -80,6 +90,12 @@
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
 
     <!-- ##### Breaking News Area Start ##### -->
     <section class="breaking-news-area">
@@ -592,16 +608,11 @@
                             </ul>
                         </div>
                         <!-- Social Info -->
-{#                        <div class="footer-social-info">#}
-{#                            <a href="#" data-toggle="tooltip" data-placement="top" title="pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>#}
-{#                            <a href="#" data-toggle="tooltip" data-placement="top" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>#}
-{#                            <a href="#" data-toggle="tooltip" data-placement="top" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>#}
-{#                            <a href="#" data-toggle="tooltip" data-placement="top" title="dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a>#}
-{#                            <a href="#" data-toggle="tooltip" data-placement="top" title="behance"><i class="fa fa-behance" aria-hidden="true"></i></a>#}
-{#                            <a href="#" data-toggle="tooltip" data-placement="top" title="linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>#}
-{#                        </div>#}
+                        <div class="footer-social-info">
+                                                        <a href="https://github.com/dcostersabin/newsportal" data-toggle="tooltip" data-placement="top" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>
 
-                        <p class="mb-15">Nullam lacinia ex eleifend orci porttitor, suscipit interdum augue condimentum. Etiam pretium turpis eget nibh laoreet iaculis. Proin ac urna at lectus volutpat lobortis. Vestibulum venenatis iaculis diam vitae lobortis. Donec tincidunt viverra elit, sed consectetur est pr etium ac. Mauris nec mauris tellus. </p>
+                        </div>
+
 
                         <!-- Copywrite Text -->
                         <p class="copywrite-text"><a href="#">

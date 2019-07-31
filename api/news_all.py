@@ -8,7 +8,7 @@ def __api_key():
 
 def get_all():
     news_api = NewsApiClient(api_key=__api_key())
-    top_headlines = news_api.get_top_headlines(sources='bbc-news,abc-news,abc-news-au,Aftenposten,al-jazeera-english',
+    top_headlines = news_api.get_top_headlines(sources='bbc-news,abc-news,the-verge,Aftenposten,al-jazeera-english',
                                                language='en')
     return top_headlines
 
