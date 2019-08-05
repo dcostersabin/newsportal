@@ -41,7 +41,7 @@
                     <nav class="classy-navbar justify-content-between" id="newsboxNav">
 
                         <!-- Nav brand -->
-                        <a href="/static/index.html" class="nav-brand"><img src="/static/img/core-img/logo.png" alt=""></a>
+                        <a href="{% url 'home' %}" class="nav-brand"><img src="/static/img/core-img/logo.png" alt=""></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -62,6 +62,7 @@
                                     <li><a href="/">Home</a></li>
                                 </ul>
                                 <ul>
+                                      <li><a href="{% url 'unauth_pricing' %}" class="active">Pricing</a></li>
                                     <li><a href="{% url 'login' %}">Sign In</a></li>
                                 </ul>
 
@@ -115,6 +116,12 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <div class="big-add-area mb-100">
+        <div class="container-fluid">
+            <a href="#"><img src="/static/img/bg-img/add2.png" alt=""></a>
         </div>
     </div>
 

@@ -8,3 +8,18 @@ class Interest(models.Model):
     sources = models.TextField(default='bbc-news')
     created_at = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class PaidUsers(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.IntegerField(default=0)
+    valid_until = models.DateTimeField(null=True)
+
+
+class Tokens(models.Model):
+    token = models.TextField
+    validity = models.IntegerField(default=1)
+
+
+
+

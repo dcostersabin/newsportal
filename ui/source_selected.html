@@ -41,7 +41,7 @@
                 <nav class="classy-navbar justify-content-between" id="newsboxNav">
 
                     <!-- Nav brand -->
-                    <a href="/static/index.html" class="nav-brand"><img src="/static/img/core-img/logo.png" alt=""></a>
+                    <a href="{% url 'home' %}" class="nav-brand"><img src="/static/img/core-img/logo.png" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -55,8 +55,7 @@
                         <div class="classycloseIcon">
                             <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                         </div>
-
-                             <!-- Nav Start -->
+      <!-- Nav Start -->
                         <div class="classynav">
                             {% if user.is_authenticated %}
                                 <ul>
@@ -136,20 +135,19 @@
 
                                 </li>
 
-                                <li><a href="{% url 'pricing' %}">Pricing</a></li>
+                                <li><a href="/pricing">Pricing</a></li>
 
 
-                                <li><a >{{ user.get_username }}</a></li>
+                                <li><a href="/profile">{{ user.get_username }}</a></li>
 
-                                <li><a href="{% url 'logout' %}">Logout</a></li>
+                                <li><a href="/logout">Logout</a></li>
 
                             {% else %}
                                 <ul>
-                                    <li><a href="{% url 'home' %}">Home</a></li>
-                                </ul>
-                                <ul>
-                                      <li><a href="{% url 'unauth_pricing' %}" class="active">Pricing</a></li>
-                                    <li><a href="{% url 'login' %}">Sign In</a></li>
+                                    <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                                    <li><a href="/login">Login</a></li>
+
+                                    <li><a href="/register">Register</a></li>
                                 </ul>
 
 
@@ -162,6 +160,7 @@
                         </div>
                         <!-- Nav End -->
 
+                    </div>
                 </nav>
             </div>
         </div>
@@ -174,6 +173,7 @@
         <div class="alert alert-{{ message.tags }}">{{ message }}</div>
     {% endfor %}
 {% endif %}
+
 <section class="breaking-news-area">
     <div class="container-fluid">
         <div class="row">
@@ -201,213 +201,107 @@
         </div>
     </div>
 </section>
-
-{#<seciton class="breaking-news">#}
-{#    <div class="container-fluid">#}
-{#          <div class="col-md-12">#}
-{#                <a href="#"><img src="/static/img/bg-img/add2.png" alt=""></a>#}
-{#          </div>#}
+<!-- ##### Breaking News Area Start ##### -->
+<!-- ##### Catagory Featured Area Start ##### -->
+{#<div class="catagory-featured-post bg-overlay clearfix" style="background-image: url({{ news.0.urlToImage }})">#}
+{#    <div class="container-fluid h-100">#}
+{#        <div class="row h-100 align-items-center">#}
+{#            <div class="col-12 col-lg-9">#}
+{#                <!-- Post Content -->#}
+{#                <div class="post-content">#}
+{#                    <p class="tag"><span>Top News</span></p>#}
+{#                    <a href="{{ news.0.url }}" class="post-title">{{ news.0.title }}</a>#}
+{#                    <p>{{ news.0.content }} </p>#}
+{#                    <span class="post-date">{{ news.0.author }}</span>#}
+{#                </div>#}
+{#            </div>#}
 {#        </div>#}
 {#    </div>#}
-{##}
-{#</seciton>#}
-
-
-
-<div class="catagory-featured-post bg-overlay clearfix" style="background-image: url({{ news.0.urlToImage }})">
-    <div class="container-fluid h-100">
-        <div class="row h-100 align-items-center">
-            <div class="col-12 col-lg-9">
-                <!-- Post Content -->
-                <div class="post-content">
-                    <p class="tag"><span>Top News</span></p>
-                    <a href="{{ news.0.url }}" class="post-title">{{ news.0.title }}</a>
-                    <p>{{ news.0.content }} </p>
-                    <span class="post-date">{{ news.0.author }}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="catagory-featured-post bg-overlay clearfix" style="background-image: url(/static/img/bg-img/add2.png)">
-    <div class="container-fluid h-100">
-        <div class="row h-100 align-items-center">
-            <div class="col-12 col-lg-9">
-                <!-- Post Content -->
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ##### Breaking News Area Start ##### -->
-
-<!-- ##### Breaking News Area End ##### -->
-
-<!-- ##### Hero Area Start ##### -->
-<div class="hero-area">
-    <!-- Hero Post Slides -->
-    <div class="hero-post-slides owl-carousel">
-
-        <!-- Single Slide -->
-        <div class="single-slide">
-            <div class="container-fluid">
-                <div class="row">
-                    <!-- Single Blog Post Area -->
-                    <div class="col-12 col-md-6">
-                        <div class="single-blog-post style-1" data-animation="fadeInUpBig" data-delay="100ms"
-                             data-duration="1000ms">
-                            <!-- Blog Thumbnail -->
-                            <div class="blog-thumbnail bg-overlay">
-                                {% if news.1.urlToImage == None %}
-                                    <a href=""><img src="/static/img/core-img/news.jpg" alt=""
-                                                    style="height: 400px"></a>
-                                {% else %}
-                                    <a href=""><img src="{{ news.1.urlToImage }}" alt="" style="height: 400px"></a>
-                                {% endif %}
-                            </div>
-
-                            <!-- Blog Content -->
-                            <div class="blog-content">
-
-                                <a href="{{ news.1.url }}" class="post-title">{{ news.1.title }}</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                        <!-- Single Blog Post Area -->
-                        <div class="single-blog-post style-1 mb-30" data-animation="fadeInUpBig" style="height: 400px"
-                             data-delay="300ms"
-                             data-duration="1000ms">
-                            <!-- Blog Thumbnail -->
-                            <div class="blog-thumbnail bg-overlay">
-                                {% if news.2.urlToImage == None %}
-                                    <a href=""><img src="/static/img/core-img/news.jpg" alt=""
-                                                    style="height: 400px"></a>
-                                {% else %}
-                                    <a href=""><img src="{{ news.2.urlToImage }}" alt="" style="height: 400px"></a>
-                                {% endif %}
-                            </div>
-
-                            <!-- Blog Content -->
-                            <div class="blog-content">
-                                <a href="{{ news.2.url }}" class="post-title">{{ news.2.title }}</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Single Slide -->
-        <div class="single-slide">
-            <div class="container-fluid">
-                <div class="row">
-                    <!-- Single Blog Post Area -->
-                    <div class="col-12 col-md-6">
-                        <div class="single-blog-post style-1" data-animation="fadeInUpBig" data-delay="100ms"
-                             data-duration="1000ms">
-                            <!-- Blog Thumbnail -->
-                            <div class="blog-thumbnail bg-overlay">
-                                {% if news.3.urlToImage == None %}
-                                    <a href=""><img src="/static/img/core-img/news.jpg" alt=""
-                                                    style="height: 400px"></a>
-                                {% else %}
-                                    <a href=""><img src="{{ news.3.urlToImage }}" alt="" style="height: 400px"></a>
-                                {% endif %}
-                            </div>
-
-                            <!-- Blog Content -->
-                            <div class="blog-content">
-                                <a href="{{ news.3.url }}" class="post-title">{{ news.3.title }}</a>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                        <!-- Single Blog Post Area -->
-                        <div class="single-blog-post style-1 mb-30" data-animation="fadeInUpBig" data-delay="300ms"
-                             data-duration="1000ms">
-                            <!-- Blog Thumbnail -->
-                            <div class="blog-thumbnail bg-overlay">
-                                {% if news.4.urlToImage == None %}
-                                    <a href=""><img src="/static/img/core-img/news.jpg" alt=""
-                                                    style="height: 400px"></a>
-                                {% else %}
-                                    <a href=""><img src="{{ news.4.urlToImage }}" alt="" style="height: 400px"></a>
-                                {% endif %}
-                            </div>
-
-                            <!-- Blog Content -->
-                            <div class="blog-content">
-                                <a href="{{ news.4.url }}" class="post-title">{{ news.4.title }}</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-<section class="intro-news-area section-padding-100-0 mb-auto">
+{#</div>#}
+<!-- ##### Catagory Featured Area End ##### -->
+<section class="intro-news-area section-padding-100-0 mb-70">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <!-- Intro News Tabs Area -->
-            <div class="col-12 col-lg-10">
+            <div class="col-10 col-lg-8">
                 <div class="intro-news-tab">
 
                     <!-- Intro News Filter -->
                     <div class="intro-news-filter d-flex justify-content-between">
-                        <h6>All the news</h6>
+                        <h6>Source Selected</h6>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav1" data-toggle="tab" href="#nav-1" role="tab"
+                                   aria-controls="nav-1" aria-selected="true">{% if source_selected %}
+                                    {{ source_selected }}
+                                   {% else %}
+                                    Opps
+                                   {% endif %}</a>
+
+                            </div>
+                        </nav>
                     </div>
 
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav1">
                             <div class="row">
-                                {% for foo in news %}
-                                    {% if foo.urlToImage == None %}
-                                        <div class="col-12 col-sm-6">
-                                            <div class="single-blog-post style-2 mb-5">
-                                                <!-- Blog Thumbnail -->
-                                                <div class="blog-thumbnail">
-                                                    <a href=""><img src="/static/img/core-img/news.jpg" alt=""></a>
-                                                </div>
 
-                                                <!-- Blog Content -->
-                                                <div class="blog-content">
-                                                    <span class="post-date">{{ foo.author }}</span>
-                                                    <a href="{{ foo.url }}" class="post-title">{{ foo.source.name }}</a>
-                                                    <p>{{ foo.content }}</p>
+
+                                {% if source_news %}
+                                    {% for foo in source_news %}
+                                       {% if foo.urlToImage == None %}
+                                           <div class="col-12 col-sm-6">
+                                                <div class="single-blog-post style-2 mb-5">
+                                                    <!-- Blog Thumbnail -->
+                                                    <div class="blog-thumbnail">
+                                                        <a href="#"><img src="/static/img/core-img/news.jpg" alt=""></a>
+                                                    </div>
+
+                                                    <!-- Blog Content -->
+                                                    <div class="blog-content">
+                                                        <span class="post-date">{{ foo.sources.name }}</span>
+                                                        <a href="{{ foo.url }}" class="post-title">{{ foo.title }}</a>
+                                                        <a href="#" class="post-author">{{ foo.author }}</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                       {% else %}
+
+
+                                            <div class="col-12 col-sm-6">
+                                                <div class="single-blog-post style-2 mb-5">
+                                                    <!-- Blog Thumbnail -->
+                                                    <div class="blog-thumbnail">
+                                                        <a href="#"><img src="{{ foo.urlToImage }}" alt=""></a>
+                                                    </div>
+
+                                                    <!-- Blog Content -->
+                                                    <div class="blog-content">
+                                                        <span class="post-date">{{ foo.sources.name }}</span>
+                                                        <a href="{{ foo.url }}" class="post-title">{{ foo.title }}</a>
+                                                        <a href="#" class="post-author">{{ foo.author }}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                       {% endif %}
+                                    {% endfor %}
 
                                     {% else %}
-                                        <div class="col-12 col-sm-6">
-                                            <div class="single-blog-post style-2 mb-5">
-                                                <!-- Blog Thumbnail -->
-                                                <div class="blog-thumbnail">
-                                                    <a href=""><img src="{{ foo.urlToImage }}" alt=""></a>
-                                                </div>
+                                <div class="container">
+                                <h5>Sorry For The  Inconvenience The News Server Failed To Respond To Your Request</h5>
+                                </div>
+                                {% endif %}
+                                <!-- Single News Area -->
 
-                                                <!-- Blog Content -->
-                                                <div class="blog-content">
-                                                    <span class="post-date">{{ foo.author }}</span>
-                                                    <a href="{{ foo.url }}" class="post-title">{{ foo.source.name }}</a>
-                                                    <p>{{ foo.content }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endif %}
 
-                                {% endfor %}
+                                <!-- Single News Area -->
+
+
+                                <!-- Single News Area -->
+
+
+                                <!-- Single News Area -->
 
 
                             </div>
@@ -418,15 +312,83 @@
                 </div>
             </div>
 
+            <!-- Sidebar Widget -->
+            <div class="col-12 col-sm-9 col-md-6 col-lg-4">
+                <div class="sidebar-area">
 
+                    <!-- Newsletter Widget -->
+                    <div class="single-widget-area newsletter-widget mb-30">
+                        <h4>Search Latest News</h4>
+                        <form action="{% url 'search' %}" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="query" id="" placeholder="Enter Keywords">
+                            <button type="submit" class="btn newsbox-btn w-100">Search</button>
+                        </form>
+                        <p class="mt-30">This Search Works Only For Past 30 Days.</p>
+                    </div>
+
+                <div class="single-widget-area add-widget mb-30">
+                            <a href="#">
+                                <img src="/static/img/bg-img/add3.png" alt="">
+                            </a>
+                        </div>
+                    <!-- Add Widget -->
+                    <div class="single-widget-area add-widget mb-30">
+                        <a href="#">
+                            <img src="/static/img/core-img/logo.png" alt="">
+                        </a>
+                    </div>
+
+                    <!-- Latest News Widget -->
+                    <div class="single-widget-area news-widget mb-30">
+                        <h4>Latest News</h4>
+
+                        <!-- Single News Area -->
+                        {% if news %}
+                            {% for foo in news %}
+                                <div class="single-blog-post d-flex style-4 mb-30">
+                                    <!-- Blog Thumbnail -->
+                                    {% if foo.urlToImage == None %}
+                                    <div class="blog-thumbnail">
+                                        <a href="#"><img src="/static/img/core-img/news.jpg" alt=""></a>
+                                    </div>
+                                        {% else %}
+                                        <div class="blog-thumbnail">
+                                        <a href="#"><img src="{{ foo.urlToImage }}" alt=""></a>
+                                    </div>
+                                    {% endif %}
+
+                                    <!-- Blog Content -->
+                                    <div class="blog-content">
+                                        <span class="post-date">{{ foo.author }}</span>
+                                        <a href="{{ foo.url }}" class="post-title">{{ foo.title }}</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        {% endif %}
+
+
+
+
+
+                        <!-- Single News Area -->
+
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </section>
+<!-- ##### Intro News Area End ##### -->
 <div class="big-add-area mb-100">
         <div class="container-fluid">
             <a href="#"><img src="/static/img/bg-img/add2.png" alt=""></a>
         </div>
     </div>
+
+<!-- ##### Footer Area Start ##### -->
 <footer class="footer-area">
     <!-- Footer Logo -->
     <div class="footer-logo mb-100">

@@ -30,4 +30,9 @@ urlpatterns = [
     path('submitSource/', home_views.submit_source, name='submitSource'),
     path('submitCategory/', home_views.submit_category, name='submitCategory'),
     path('searchQuery/', home_views.search, name='search'),
+    path('pricing/', home_views.pricing, name='pricing'),
+    path('source/',home_views.source_selected, name='source_selected'),
+    path('categorySelected', home_views.category_selected, name='category_selected'),
+    path('languageSelected/',home_views.language_selected, name='languageSelected'),
+    path('unauthpricing/',home_views.unauth_pricing, name='unauth_pricing'),
 ]

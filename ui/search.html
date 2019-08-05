@@ -55,38 +55,110 @@
                             <div class="classycloseIcon">
                                 <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                             </div>
-
-                            <!-- Nav Start -->
-                            <div class="classynav">
-                                {% if user.is_authenticated %}
-                                 <ul>
-                                    <li><a href="{% url 'home' %}" class="active">Home</a></li>
+     <!-- Nav Start -->
+                        <div class="classynav">
+                            {% if user.is_authenticated %}
+                                <ul>
+                                    <li><a href="{% url 'personal' %}">Personal</a></li>
                                 </ul>
-                                     <ul>
-                                    <li><a href="/personal">Personalized</a></li>
-                                </ul>
-                                    <ul>
+                                <ul>
                                     <li><a href="{% url 'edit' %}">Customize</a></li>
                                 </ul>
-                                    <ul>
-                                    <li><a href="/logout">Logout</a></li>
-                                </ul>
-                                {% else %}
+
                                 <ul>
-                                    <li><a href="/login">Login</a></li>
+                                    <li><a href="{% url 'home' %}" class="active">Home</a></li>
+
+                                    <li><a href="">Sources</a>
+                                        <ul class="megamenu">
+                                            <ul class="single-mega cn-col-4">
+
+                                                {% for foo in sources %}
+                                                    <li><a onclick="sourceSelect('{{ foo.id }}')">{{ foo.name }}</a>
+                                                    </li>
+                                                    <form action="{% url 'source_selected' %}" method="GET"
+                                                          id="selectSourceForm{{ foo.id }}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="source_id" value="{{ foo.id }}">
+                                                    </form>
+                                                    {% if forloop.counter|divisibleby:5 %}
+                                                        </ul>
+                                                        <ul class="single-mega cn-col-4">
+
+                                                    {% endif %}
+                                                {% if forloop.last %}
+                                                    {% if forloop.counter|divisibleby:5 %}
+                                                    {% else %}
+                                                        </ul>
+                                                    {% endif %}
+                                                {% endif %}
+                                                {% endfor %}
+                                        </ul>
+                                    </li>
+
+
                                 </ul>
-                                  <ul>
+
+                                </li>
+                                <li><a href="">Category</a>
+                                    <ul class="dropdown">
+                                        {% for foo in categories %}
+                                            <li>
+                                                <a onclick="categorySelected('{{ foo }}','{{ forloop.counter0 }}')">{{ foo }}</a>
+                                            </li>
+                                            <form action="{% url 'category_selected' %}" method="GET"
+                                                  id="categoryForm{{ forloop.counter0 }}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="category_name" value="{{ foo }}">
+                                            </form>
+                                        {% endfor %}
+
+                                    </ul>
+                                </li>
+
+                                <li>
+
+                                <li><a href="">Language</a>
+                                    <ul class="dropdown">
+                                        {% for foo in languages %}
+                                            <li>
+                                                <a onclick="languageSelected('{{ foo.id }}',{{ forloop.counter }})">{{ foo.name }}</a>
+                                            </li>
+                                            <form action="{% url 'languageSelected' %}" method="get"
+                                                  id="languageSelectedForm{{ forloop.counter }}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="language_id" value="{{ foo.id }}">
+                                            </form>
+                                        {% endfor %}
+
+                                    </ul>
+                                </li>
+
+                                </li>
+
+                                <li><a href="/pricing">Pricing</a></li>
+
+
+                                <li><a href="/profile">{{ user.get_username }}</a></li>
+
+                                <li><a href="/logout">Logout</a></li>
+
+                            {% else %}
+                                <ul>
+                                    <li><a href="{% url 'home' %}" class="active">Home</a></li>
+                                    <li><a href="/login">Login</a></li>
+
                                     <li><a href="/register">Register</a></li>
                                 </ul>
-                                {% endif %}
 
 
-                                <!-- Header Add Area -->
 
-                            </div>
-                            <!-- Nav End -->
+                            {% endif %}
+
+
+                            <!-- Header Add Area -->
 
                         </div>
+                        <!-- Nav End -->
                     </nav>
                 </div>
             </div>
@@ -146,7 +218,7 @@
     </div>
     <!-- ##### Catagory Featured Area End ##### -->
 <section class="intro-news-area section-padding-100-0 mb-70">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-center">
                 <!-- Intro News Tabs Area -->
                 <div class="col-12 col-lg-8">
@@ -174,6 +246,7 @@
 
                                                         <!-- Blog Content -->
                                                         <div class="blog-content">
+                                                            <span class="published-date">{{ foo.publishedAt|slice:"10"}}</span>
                                                               <span class="post-date">{{ foo.sources.name }}</span>
                                                             <a href="{{ foo.url }}" class="post-title">{{ foo.title }}</a>
                                                             <a href="#" class="post-author mb-30">{{foo.author}}</a>
@@ -191,6 +264,7 @@
 
                                             <!-- Blog Content -->
                                             <div class="blog-content">
+                                                <span class="published-date">{{ foo.publishedAt|slice:"10"}}</span>
                                                 <span class="post-date">{{ foo.sources.name }}</span>
                                                 <a href="#" class="post-title">{{ foo.title }}</a>
                                                 <a href="#" class="post-author">{{ foo.author }}</a>
@@ -222,6 +296,12 @@
                             <p class="mt-30">This Search Works Only For Past 30 Days.</p>
                         </div>
 
+
+                    <div class="single-widget-area add-widget mb-30">
+                            <a href="#">
+                                <img src="/static/img/bg-img/add3.png" alt="">
+                            </a>
+                        </div>
                         <!-- Add Widget -->
                         <div class="single-widget-area add-widget mb-30">
                             <a href="#">
@@ -266,6 +346,12 @@
         </div>
     </section>
     <!-- ##### Intro News Area End ##### -->
+
+    <div class="big-add-area mb-100">
+        <div class="container-fluid">
+            <a href="#"><img src="/static/img/bg-img/add2.png" alt=""></a>
+        </div>
+    </div>
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
