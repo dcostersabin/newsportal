@@ -2,8 +2,8 @@ from newsapi import NewsApiClient
 
 
 def __api_key():
-    key = 'e0d3ec8f0c0140f6b99146bf9e4469d7'
-    # key = '657a010b291d44b29c0bea510c097299'
+    key = ''
+    # key = ''
     return key
 
 
